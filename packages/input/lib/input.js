@@ -17,6 +17,14 @@ export class HTMLInputElement extends Properties(HTMLElement) {
         toAttributeConverter: StringConverter.toAttribute,
       },
 
+      accessKey: {
+        observe: true,
+        DOM: true,
+        reflect: true,
+        fromAttributeConverter: StringConverter.fromAttribute,
+        toAttributeConverter: StringConverter.toAttribute,
+      },
+
       alt: {
         observe: true,
         DOM: true,
@@ -249,6 +257,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       ${this.styles}
       <input
       .accept="${this.accept}"
+      .accessKey="${this.accessKey}"
       .alt="${this.alt}"
       ?autocomplete="${this.autocomplete}"
       ?autofocus="${this.autofocus}"

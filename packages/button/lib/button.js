@@ -8,6 +8,14 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
   static get properties() {
 
     return {
+      
+      accessKey: {
+        observe: true,
+        DOM: true,
+        reflect: true,
+        fromAttributeConverter: StringConverter.fromAttribute,
+        toAttributeConverter: StringConverter.toAttribute,
+      },
 
       autofocus: {
         observe: true,
@@ -91,6 +99,7 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
     return html`
       ${this.styles}
       <button
+        .accessKey="${this.accessKey}"
         ?autofocus="${this.autofocus}"
         ?disabled="${this.disabled}"
         .tabIndex="${this.tabIndex}"
