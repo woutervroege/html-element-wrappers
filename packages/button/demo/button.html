@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="module">      
+
+      import { HTMLButtonElement, html } from '../lib/button.js';
+
+      class MyButton extends HTMLButtonElement {
+
+        get styles() {
+          return html`
+            <style>
+              :host {
+                outline: none;
+                display: inline-block;
+              }
+
+              button {
+                box-sizing: border-box;
+                width: 100%;
+                height: 54px;
+                padding: 0 16px;
+                font-size: 22px;
+              }
+            </style>
+          `
+        }
+        
+      }
+
+      window.customElements.define('my-button', MyButton);
+      
+    </script>
+  </head>
+
+  <body>
+
+    <my-button id="btn">My Button</my-button>
+
+    <script>
+      btn.onclick = () => alert('Click!');
+    </script>
+
+  </body>
+
+</html>
