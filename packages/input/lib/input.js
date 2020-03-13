@@ -201,6 +201,14 @@ export class HTMLInputElement extends Properties(HTMLElement) {
         toAttributeConverter: NumberConverter.toAttribute,
       },
 
+      tabIndex: {
+        observe: true,
+        DOM: true,
+        reflect: true,
+        fromAttributeConverter: NumberConverter.fromAttribute,
+        toAttributeConverter: NumberConverter.toAttribute,
+      },
+
       type: {
         observe: true,
         DOM: true,
@@ -271,6 +279,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       .size="${this.size}"
       .src="${this.src}"
       .step="${this.step}"
+      .tabIndex="${this.tabIndex}"
       .width="${this.width}"
       .type="${this.type}"
       .value="${this.value}"

@@ -33,6 +33,14 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
         toAttributeConverter: BooleanConverter.toAttribute,
       },
 
+      tabIndex: {
+        observe: true,
+        DOM: true,
+        reflect: true,
+        fromAttributeConverter: NumberConverter.fromAttribute,
+        toAttributeConverter: NumberConverter.toAttribute,
+      },
+
       type: {
         observe: true,
         DOM: true,
@@ -94,6 +102,7 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
         .accessKey="${this.accessKey}"
         ?autofocus="${this.autofocus}"
         ?disabled="${this.disabled}"
+        .tabIndex="${this.tabIndex}"
         .type="${this.type}"
         .value="${this.value}"
       ><slot></slot></button>
