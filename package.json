@@ -1,0 +1,20 @@
+{
+  "name": "html-element-shims",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "es-dev-server --app-index . --http2 --node-resolve --watch --open"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "html-element-property-mixins": "^0.9.3",
+    "lit-html": "^1.1.2"
+  },
+  "devDependencies": {
+    "es-dev-server": "^1.43.1",
+    "lerna": "^3.18.3"
+  }
+}
