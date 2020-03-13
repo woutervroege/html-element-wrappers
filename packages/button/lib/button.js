@@ -57,7 +57,7 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
         toAttributeConverter: StringConverter.toAttribute,
       }
 
-    }
+    };
 
   }
 
@@ -92,7 +92,7 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
       <style>
         :host { outline: none }
       </style>
-    `
+    `;
   }
 
   get template() {
@@ -106,14 +106,14 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
         .type="${this.type}"
         .value="${this.value}"
       ><slot></slot></button>
-    `
+    `;
   }
 
   render() {
     window.cancelAnimationFrame(this._renderDebouncer);
     this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this})  
-    })
+      litRender(this.template, this.shadowRoot, {eventContext: this});  
+    });
   }
 
   get willValidate() {

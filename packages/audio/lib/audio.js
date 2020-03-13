@@ -24,7 +24,7 @@ export class HTMLAudioElement extends HTMLMediaElement {
   get styles() {
     return html`
       <style></style>
-    `
+    `;
   }
   
   get template() {
@@ -70,14 +70,14 @@ export class HTMLAudioElement extends HTMLMediaElement {
         @waiting="${this.__bubbleEvent}"
       ><slot></slot>
       </audio>
-    `
+    `;
   }
   
   render() {
     window.cancelAnimationFrame(this._renderDebouncer);
     this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this})  
-    })
+      litRender(this.template, this.shadowRoot, {eventContext: this});  
+    });
   }
   
   get $element() {

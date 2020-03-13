@@ -224,7 +224,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
         toAttributeConverter: StringConverter.toAttribute,
       }
 
-    }
+    };
 
   }
 
@@ -249,7 +249,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       <style>
         :host { outline: none }
       </style>
-    `
+    `;
   }
 
   get template() {
@@ -283,17 +283,17 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       .width="${this.width}"
       .type="${this.type}"
       .value="${this.value}"
-      @input="${(e) => { console.info('input!'); this.value = e.target.value}}"
-      @change="${(e) => { console.info('change!'); this.value = e.target.value}}"
+      @input="${(e) => { console.info('input!'); this.value = e.target.value;}}"
+      @change="${(e) => { console.info('change!'); this.value = e.target.value;}}"
       >
-    `
+    `;
   }
 
   render() {
     window.cancelAnimationFrame(this._renderDebouncer);
     this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this})  
-    })
+      litRender(this.template, this.shadowRoot, {eventContext: this});  
+    });
   }
 
   get list() {
@@ -348,7 +348,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
 
   get $element() {
     if(!this.shadowRoot) return {};
-    return this.shadowRoot.querySelector('input') || {}
+    return this.shadowRoot.querySelector('input') || {};
   }
 
   __initFocusDelegation() {

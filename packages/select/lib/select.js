@@ -81,7 +81,7 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
         toAttributeConverter: NumberConverter.toAttribute,
       },
 
-    }
+    };
 
   }
 
@@ -106,7 +106,7 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
       <style>
         :host { outline: none }
       </style>
-    `
+    `;
   }
 
   get template() {
@@ -126,14 +126,14 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
         @change="${(e) => this.selectedIndex = e.target.selectedIndex}"
       ></select>
       <slot hidden></slot>
-    `
+    `;
   }
 
   render() {
     window.cancelAnimationFrame(this._renderDebouncer);
     this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this})  
-    })
+      litRender(this.template, this.shadowRoot, {eventContext: this});  
+    });
   }
 
   get labels() {
@@ -184,7 +184,7 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
     return this.shadowRoot.querySelector('select');
   }
 
-  _handleSlotChange(e) {
+  _handleSlotChange() {
     this.$element.innerHTML = this.innerHTML;
   }
 

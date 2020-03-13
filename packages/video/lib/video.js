@@ -12,9 +12,9 @@ export class HTMLVideoElement extends HTMLMediaElement {
         DOM: true,
         reflect: true
       },
-    }
+    };
 
-    return {...super.properties, ...props}
+    return {...super.properties, ...props};
 
   }
 
@@ -46,7 +46,7 @@ export class HTMLVideoElement extends HTMLMediaElement {
   get styles() {
     return html`
       <style></style>
-    `
+    `;
   }
   
   get template() {
@@ -92,14 +92,14 @@ export class HTMLVideoElement extends HTMLMediaElement {
         @waiting="${this.__bubbleEvent}"
       ><slot></slot>
       </video>
-    `
+    `;
   }
   
   render() {
     window.cancelAnimationFrame(this._renderDebouncer);
     this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this})  
-    })
+      litRender(this.template, this.shadowRoot, {eventContext: this});  
+    });
   }
   
   get $element() {

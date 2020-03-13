@@ -123,7 +123,7 @@ export class HTMLMediaElement extends Properties(HTMLElement) {
         toAttributeConverter: NumberConverter.toAttribute,
       },
 
-    }
+    };
 
   }
 

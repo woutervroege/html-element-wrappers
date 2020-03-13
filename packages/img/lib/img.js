@@ -71,7 +71,7 @@ export class HTMLImageElement extends Properties(HTMLElement) {
         toAttributeConverter: StringConverter.toAttribute,
       },
 
-    }
+    };
 
   }
 
@@ -127,7 +127,7 @@ export class HTMLImageElement extends Properties(HTMLElement) {
           display: inline;
         }
       </style>
-    `
+    `;
   }
 
   get template() {
@@ -143,14 +143,14 @@ export class HTMLImageElement extends Properties(HTMLElement) {
       .srcSet="${this.srcSet}"
       .useMap="${this.useMap}"
       >
-    `
+    `;
   }
 
   render() {
     window.cancelAnimationFrame(this._renderDebouncer);
     this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this})  
-    })
+      litRender(this.template, this.shadowRoot, {eventContext: this});  
+    });
   }
 
   get $element() {
