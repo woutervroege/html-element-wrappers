@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="module">      
+
+      import { HTMLImageElement, html } from '../lib/img.js';
+
+      class MyImg extends HTMLImageElement {
+        
+      }
+
+      window.customElements.define('my-img', MyImg);
+      
+    </script>
+  </head>
+
+  <body>
+
+    <my-img id="demo" src="https://cdn.pixabay.com/photo/2018/01/14/23/12/nature-3082832_960_720.jpg"></my-img>
+
+    <script>
+      demo.onload = (e) => alert('load!')
+    </script>
+
+  </body>
+
+</html>
