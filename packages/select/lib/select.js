@@ -33,14 +33,6 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
         toAttributeConverter: BooleanConverter.toAttribute,
       },
 
-      tabIndex: {
-        observe: true,
-        DOM: true,
-        reflect: true,
-        fromAttributeConverter: NumberConverter.fromAttribute,
-        toAttributeConverter: NumberConverter.toAttribute,
-      },
-
       length: {
         observe: true,
         DOM: true,
@@ -88,8 +80,8 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
   constructor() {
     super();
     this.attachShadow({mode: 'open', delegatesFocus: true});
-    this.tabIndex = 0;
     this.accessKey = '';
+    this.tabIndex = 0;
     this.selectedIndex = 0;
     this.render();
     this.__initFocusDelegation();
@@ -120,7 +112,6 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
         ?multiple="${this.multiple}"
         .selectedIndex="${this.selectedIndex}"
         .size="${this.size}"
-        .tabIndex="${this.tabIndex}"
         ?required="${this.required}"
         @input="${(e) => this.selectedIndex = e.target.selectedIndex}"
         @change="${(e) => this.selectedIndex = e.target.selectedIndex}"
