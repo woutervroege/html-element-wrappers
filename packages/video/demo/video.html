@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="module">      
+
+      import { HTMLVideoElement, html } from '../lib/video.js';
+
+      class MyVideo extends HTMLVideoElement {
+        
+      }
+
+      window.customElements.define('my-video', MyVideo);
+      
+    </script>
+  </head>
+
+  <body>
+
+    <my-video
+      id="demo"
+      src="https://www.w3schools.com/tags/mov_bbb.mp4"
+      autoplay
+      controls
+    ></my-video>
+
+    <script>
+      demo.addEventListener('play', (e) => alert('play!'))
+    </script>
+
+  </body>
+
+</html>
