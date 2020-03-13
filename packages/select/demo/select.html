@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="module">      
+
+      import { HTMLSelectElement, html } from '../lib/select.js';
+
+      class MySelect extends HTMLSelectElement {
+        
+      }
+
+      window.customElements.define('my-select', MySelect);
+      
+    </script>
+  </head>
+
+  <body>
+
+    <my-select id="demo">
+      <option value="APPL">Apple</option>
+      <option value="GOOGL">Google</options>
+    </my-select>
+
+    <script>
+      demo.oninput = (e) => alert('input!')
+    </script>
+
+  </body>
+
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "select",
+  "version": "0.0.0",
+  "description": "HTMLSelectorElement",
+  "author": "Wouter Vroege <wouter@woutervroege.nl>",
+  "homepage": "https://github.com/woutervroege/html-element-shims#readme",
+  "license": "ISC",
+  "main": "lib/select.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woutervroege/html-element-shims.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/woutervroege/html-element-shims/issues"
+  }
+}
