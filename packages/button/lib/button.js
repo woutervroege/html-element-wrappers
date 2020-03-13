@@ -9,14 +9,6 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
 
     return {
 
-      accessKey: {
-        observe: true,
-        DOM: true,
-        reflect: true,
-        fromAttributeConverter: StringConverter.fromAttribute,
-        toAttributeConverter: StringConverter.toAttribute,
-      },
-
       autofocus: {
         observe: true,
         DOM: true,
@@ -71,22 +63,6 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
     this.__initFocusDelegation();
   }
 
-  get accessKey() {
-    return this._accessKey;
-  }
-
-  set accessKey(val) {
-    this._accessKey = val;
-  }
-  
-  get tabIndex() {
-    return this._tabIndex;
-  }
-
-  set tabIndex(val) {
-    this._tabIndex = parseInt(val);
-  }
-
   get type() {
     return this._type || 'submit';
   }
@@ -115,7 +91,6 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
     return html`
       ${this.styles}
       <button
-        .accessKey="${this.accessKey}"
         ?autofocus="${this.autofocus}"
         ?disabled="${this.disabled}"
         .tabIndex="${this.tabIndex}"
@@ -133,36 +108,36 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
   }
 
   get willValidate() {
-    return this.$button.willValidate();
+    return this.$element.willValidate();
   }
 
   get validationMessage() {
-    return this.$button.validationMessage();
+    return this.$element.validationMessage();
   }
 
   get validity() {
-    return this.$button.validity();
+    return this.$element.validity();
   }
 
   checkValidity()	{
-    return this.$button.checkValidity();
+    return this.$element.checkValidity();
   }
 
   reportValidity() {
-    return this.$button.reportValidity();
+    return this.$element.reportValidity();
   }
 
   setCustomValidity(val) {
-    this.$button.setCustomValidity(val);
+    this.$element.setCustomValidity(val);
   }
 
-  get $button() {
+  get $element() {
     return this.shadowRoot.querySelector('button');
   }
 
   __initFocusDelegation() {
     if(this.shadowRoot.delegatesFocus) return;
-    this.addEventListener('focus', () => this.$button.focus());
+    this.addEventListener('focus', () => this.$element.focus());
   }
 
 }
