@@ -1,6 +1,6 @@
 {
   "name": "input",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "HTMLInputElement",
   "author": "Wouter Vroege <wouter@woutervroege.nl>",
   "homepage": "https://github.com/woutervroege/html-element-shims#readme",

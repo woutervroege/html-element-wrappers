@@ -1,6 +1,6 @@
 {
   "name": "img",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "HTMLImageElement",
   "author": "Wouter Vroege <wouter@woutervroege.nl>",
   "homepage": "https://github.com/woutervroege/html-element-shims#readme",
