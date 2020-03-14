@@ -1,10 +1,10 @@
 {
-  "name": "img",
+  "name": "@html-element-wrappers/img",
   "version": "0.1.0",
   "description": "HTMLImageElement",
   "author": "Wouter Vroege <wouter@woutervroege.nl>",
   "homepage": "https://github.com/woutervroege/html-element-shims#readme",
-  "license": "ISC",
+  "license": "MIT",
   "main": "lib/img.js",
   "directories": {
     "lib": "lib",
@@ -22,5 +22,6 @@
   },
   "bugs": {
     "url": "https://github.com/woutervroege/html-element-shims/issues"
-  }
+  },
+  "gitHead": "5ec8e91b251ecb487f4d97eb2c3e79e71ed5d473"
 }

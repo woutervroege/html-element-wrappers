@@ -1,7 +1,8 @@
 {
-  "name": "html-element-shims",
+  "private": true,
+  "name": "html-element-wrappers",
   "version": "0.0.0",
-  "description": "",
+  "description": "HTMLElement Wrappers",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
