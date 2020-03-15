@@ -63,10 +63,16 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
 
   constructor() {
     super();
+
+    const $element = document.createElement('button');
+    this.accessKey = $element.accessKey;
+    this.autofocus = $element.autofocus;
+    this.disabled = $element.disabled;
+    this.tabIndex = $element.tabIndex;
+    this.type = $element.type;
+    this.value = $element.value;
+
     this.attachShadow({mode: 'open', delegatesFocus: true});
-    this.tabIndex = 0;
-    this.accessKey = '';
-    this.value = '';
     this.render();
     this.__initFocusDelegation();
   }
@@ -116,8 +122,20 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
     });
   }
 
-  get willValidate() {
-    return this.$element.willValidate();
+  get accessKey() {
+    return this._accessKey;
+  }
+
+  set accessKey(val) {
+    this._accessKey = val;
+  }
+
+  get tabIndex() {
+    return this._tabIndex;
+  }
+
+  set tabIndex(val) {
+    this._tabIndex = parseInt(val);
   }
 
   get validationMessage() {
@@ -126,6 +144,10 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
 
   get validity() {
     return this.$element.validity();
+  }
+
+  get willValidate() {
+    return this.$element.willValidate();
   }
 
   checkValidity()	{
