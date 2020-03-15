@@ -77,14 +77,16 @@ export class HTMLImageElement extends Properties(HTMLElement) {
 
   constructor() {
     super();
-    this.alt = '';
-    this.decoding = 'auto';
-    this.referrerPolicy = '';
-    this.src = '';
-    this.srcSet = '';
-    this.useMap = '';
-    this.height = '';
-    this.width = '';
+
+    const $element = document.createElement('img');
+    this.alt = $element.alt;
+    this.crossOrigin = $element.crossOrigin;
+    this.decoding = $element.decoding;
+    this.isMap = $element.isMap;
+    this.referrerPolicy = $element.referrerPolicy;
+    this.src = $element.src;
+    this.srcSet = $element.srcSet;
+    this.useMap = $element.useMap;
 
     this.attachShadow({mode: 'open', delegatesFocus: true});
     this.render();
