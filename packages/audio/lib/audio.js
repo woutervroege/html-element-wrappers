@@ -41,6 +41,7 @@ export class HTMLAudioElement extends HTMLMediaElement {
         .preload="${this.preload}"
         .src="${this.src}"
         .srcObject="${this.srcObject}"
+        .tabIndex="${this.tabIndex}"
         .volume="${this.volume}"
         @abort="${this.__bubbleEvent}"
         @canplay="${this.__bubbleEvent}"
@@ -83,6 +84,7 @@ export class HTMLAudioElement extends HTMLMediaElement {
   __initFocusDelegation() {
     if(this.shadowRoot.delegatesFocus) return;
     this.addEventListener('focus', () => this.$element.focus());
+    this.addEventListener('click', () => this.$element.focus());
   }
 
 }

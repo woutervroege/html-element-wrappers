@@ -136,6 +136,7 @@ export class HTMLImageElement extends Properties(HTMLElement) {
     return html`
       ${this.styles}
       <img
+      .accessKey="${this.accessKey}"
       .alt="${this.alt}"
       .crossOrigin="${this.crossOrigin}"
       .decoding="${this.decoding}"
@@ -143,6 +144,7 @@ export class HTMLImageElement extends Properties(HTMLElement) {
       .referrerPolicy="${this.referrerPolicy}"
       .src="${this.src}"
       .srcSet="${this.srcSet}"
+      .tabIndex="${this.tabIndex}"
       .useMap="${this.useMap}"
       >
     `;
@@ -162,6 +164,7 @@ export class HTMLImageElement extends Properties(HTMLElement) {
   __initFocusDelegation() {
     if(this.shadowRoot.delegatesFocus) return;
     this.addEventListener('focus', () => this.$element.focus());
+    this.addEventListener('click', () => this.$element.focus());
   }
 
 }

@@ -169,6 +169,7 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
   __initFocusDelegation() {
     if(this.shadowRoot.delegatesFocus) return;
     this.addEventListener('focus', () => this.$element.focus());
+    this.addEventListener('click', () => this.$element.focus());
   }
 
 }
