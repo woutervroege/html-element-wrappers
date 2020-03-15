@@ -20,12 +20,11 @@ export class HTMLVideoElement extends HTMLMediaElement {
 
   constructor() {
     super();
+
+    const $element = document.createElement('video');
+    this.poster = $element.poster;
+
     this.attachShadow({mode: 'open', delegatesFocus: true});
-    this.currentTime = 0;
-    this.defaultPlaybackRate = 1;
-    this.volume = 1;
-    this.accessKey = '';
-    this.value = '';
     this.render();
     this.__initFocusDelegation();
   }

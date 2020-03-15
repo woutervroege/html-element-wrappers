@@ -6,12 +6,8 @@ export class HTMLAudioElement extends HTMLMediaElement {
 
   constructor() {
     super();
+
     this.attachShadow({mode: 'open', delegatesFocus: true});
-    this.currentTime = 0;
-    this.defaultPlaybackRate = 1;
-    this.volume = 1;
-    this.accessKey = '';
-    this.value = '';
     this.render();
     this.__initFocusDelegation();
   }
@@ -36,7 +32,7 @@ export class HTMLAudioElement extends HTMLMediaElement {
         ?controls="${this.controls}"
         .crossOrigin="${this.crossOrigin}"
         .currentTime="${this.currentTime}"
-        ?defaultMuted="${this.defaultMuted}"
+        .defaultMuted="${this.defaultMuted}"
         .defaultPlaybackRate="${this.defaultPlaybackRate}"
         ?disableRemotePlayback="${this.disableRemotePlayback}"
         ?loop="${this.loop}"
