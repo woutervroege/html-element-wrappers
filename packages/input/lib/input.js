@@ -274,6 +274,10 @@ export class HTMLInputElement extends Properties(HTMLElement) {
     return html`
       <style>
         :host { outline: none }
+
+        input:invalid {
+          border: 1px solid red;
+        }
       </style>
     `;
   }
@@ -298,7 +302,6 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       .min="${this.min}"
       .minlength="${this.minlength}"
       ?multiple="${this.multiple}"
-      .pattern="${this.pattern}"
       .placeholder="${this.placeholder}"
       ?readonly="${this.readonly}"
       ?required="${this.required}"
@@ -319,6 +322,8 @@ export class HTMLInputElement extends Properties(HTMLElement) {
     window.cancelAnimationFrame(this._renderDebouncer);
     this._renderDebouncer = window.requestAnimationFrame(() => {
       litRender(this.template, this.shadowRoot, {eventContext: this});  
+      if(this.pattern) this.$element.setAttribute('pattern', this.pattern);
+      else this.$element.removeAttribute('pattern');
     });
   }
 
