@@ -2,21 +2,15 @@
 <html>
   <head>
     <script type="module">      
-
       import { HTMLSelectElement, html } from '../lib/select.js';
-
-      class MySelect extends HTMLSelectElement {
-        
-      }
-
+      class MySelect extends HTMLSelectElement {}
       window.customElements.define('my-select', MySelect);
-      
     </script>
   </head>
 
   <body>
 
-    <my-select id="demo" tabindex="0" accesskey="x">
+    <my-select id="demo" accesskey="x">
       <option value="APPL">Apple</option>
       <option value="GOOGL">Google</option>
     </my-select>
