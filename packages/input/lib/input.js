@@ -261,7 +261,6 @@ export class HTMLInputElement extends Properties(HTMLElement) {
     this.value = $element.value;
 
     this.attachShadow({mode: 'open', delegatesFocus: true});
-
     this.render();
     this.__initFocusDelegation();
   }
@@ -343,16 +342,16 @@ export class HTMLInputElement extends Properties(HTMLElement) {
     this._tabIndex = parseInt(val);
   }
 
-  get willValidate() {
-    return this.$element.willValidate();
-  }
-
   get validationMessage() {
     return this.$element.validationMessage();
   }
 
   get validity() {
     return this.$element.validity();
+  }
+
+  get willValidate() {
+    return this.$element.willValidate();
   }
 
   checkValidity()	{
