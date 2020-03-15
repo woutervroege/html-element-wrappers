@@ -2,34 +2,9 @@
 <html>
   <head>
     <script type="module">      
-
       import { HTMLButtonElement, html } from '../lib/button.js';
-
-      class MyButton extends HTMLButtonElement {
-
-        // get styles() {
-        //   return html`
-        //     <style>
-        //       :host {
-        //         outline: none;
-        //         display: inline-block;
-        //       }
-
-        //       button {
-        //         box-sizing: border-box;
-        //         width: 100%;
-        //         height: 54px;
-        //         padding: 0 16px;
-        //         font-size: 22px;
-        //       }
-        //     </style>
-        //   `
-        // }
-        
-      }
-
+      class MyButton extends HTMLButtonElement {}
       window.customElements.define('my-button', MyButton);
-      
     </script>
   </head>
 
