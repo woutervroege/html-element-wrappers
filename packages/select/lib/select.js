@@ -33,14 +33,6 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
         toAttributeConverter: BooleanConverter.toAttribute,
       },
 
-      tabIndex: {
-        observe: true,
-        DOM: true,
-        reflect: true,
-        fromAttributeConverter: NumberConverter.fromAttribute,
-        toAttributeConverter: NumberConverter.toAttribute,
-      },
-
       length: {
         observe: true,
         DOM: true,
@@ -73,6 +65,14 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
         toAttributeConverter: NumberConverter.toAttribute,
       },
 
+      tabIndex: {
+        observe: true,
+        DOM: true,
+        reflect: true,
+        fromAttributeConverter: NumberConverter.fromAttribute,
+        toAttributeConverter: NumberConverter.toAttribute,
+      },
+
       size: {
         observe: true,
         DOM: true,
@@ -87,10 +87,19 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
 
   constructor() {
     super();
+
+    const $element = document.createElement('select');
+    this.accessKey = $element.accessKey;
+    this.autofocus = $element.autofocus;
+    this.disabled = $element.disabled;
+    this.length = $element.length;
+    this.multiple = $element.multiple;
+    this.selectedIndex = $element.selectedIndex;
+    this.size = $element.size;
+    this.tabIndex = $element.tabIndex;
+    this.required = $element.required;
+
     this.attachShadow({mode: 'open', delegatesFocus: true});
-    this.tabIndex = 0;
-    this.accessKey = '';
-    this.selectedIndex = 0;
     this.render();
     this.__initFocusDelegation();
     this.shadowRoot.addEventListener('slotchange', this._handleSlotChange.bind(this));
@@ -136,6 +145,14 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
     });
   }
 
+  get accessKey() {
+    return this._accessKey;
+  }
+
+  set accessKey(val) {
+    this._accessKey = val;
+  }  
+
   get labels() {
     return this.$element.labels;
   }
@@ -146,6 +163,14 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
 
   get selectedOptions() {
     return this.$element.selectedOptions;
+  }
+
+  get tabIndex() {
+    return this._tabIndex;
+  }
+
+  set tabIndex(val) {
+    this._tabIndex = parseInt(val);
   }
 
   get type() {
