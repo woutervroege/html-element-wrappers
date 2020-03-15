@@ -283,8 +283,8 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       .width="${this.width}"
       .type="${this.type}"
       .value="${this.value}"
-      @input="${(e) => { console.info('input!'); this.value = e.target.value;}}"
-      @change="${(e) => { console.info('change!'); this.value = e.target.value;}}"
+      @input="${(e) => { this.value = e.target.value; this.checked = e.target.checked; }}"
+      @change="${(e) => { this.value = e.target.value; this.checked = e.target.checked; }}"
       >
     `;
   }
