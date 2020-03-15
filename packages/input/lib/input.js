@@ -230,11 +230,38 @@ export class HTMLInputElement extends Properties(HTMLElement) {
 
   constructor() {
     super();
+
+    const $element = document.createElement('input');
+    this.accept = $element.accept;
+    this.accessKey = $element.accessKey;
+    this.alt = $element.alt;
+    this.autocomplete = $element.autocomplete;
+    this.autofocus = $element.autofocus;
+    this.capture = $element.capture;
+    this.checked = $element.checked;
+    this.dirname = $element.dirname;
+    this.disabled = $element.disabled;
+    this.height = $element.height;
+    this.inputmode = $element.inputmode;
+    this.max = $element.max;
+    this.maxlength = $element.maxlength;
+    this.min = $element.min;
+    this.minlength = $element.minlength;
+    this.multiple = $element.multiple;
+    this.pattern = $element.pattern;
+    this.placeholder = $element.placeholder;
+    this.readonly = $element.readonly;
+    this.required = $element.required;
+    this.size = $element.size;
+    this.src = $element.src;
+    this.step = $element.step;
+    this.tabIndex = $element.tabIndex;
+    this.width = $element.width;
+    this.type = $element.type;
+    this.value = $element.value;
+
     this.attachShadow({mode: 'open', delegatesFocus: true});
-    this.tabIndex = 0;
-    this.accessKey = '';
-    this.size = 20;
-    this.value = '';
+
     this.render();
     this.__initFocusDelegation();
   }
@@ -271,7 +298,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       .maxlength="${this.maxlength}"
       .min="${this.min}"
       .minlength="${this.minlength}"
-      .multiple="${this.multiple}"
+      ?multiple="${this.multiple}"
       .pattern="${this.pattern}"
       .placeholder="${this.placeholder}"
       ?readonly="${this.readonly}"
@@ -296,8 +323,24 @@ export class HTMLInputElement extends Properties(HTMLElement) {
     });
   }
 
+  get accessKey() {
+    return this._accessKey;
+  }
+
+  set accessKey(val) {
+    this._accessKey = val;
+  }
+
   get list() {
     return this.$element.list;
+  }
+
+  get tabIndex() {
+    return this._tabIndex;
+  }
+
+  set tabIndex(val) {
+    this._tabIndex = parseInt(val);
   }
 
   get willValidate() {
