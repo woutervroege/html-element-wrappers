@@ -28,6 +28,6 @@
   },
   "gitHead": "9975a192d741affc5e7241d6bda5e65b0ff2b76d",
   "dependencies": {
-    "html-element-property-mixins": "^0.9.4"
+    "html-element-property-mixins": "^0.10.2"
   }
 }
