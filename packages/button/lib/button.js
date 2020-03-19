@@ -1,9 +1,10 @@
 import { Properties } from 'html-element-property-mixins';
+import { PropertiesChangedCallback } from 'html-element-property-mixins/src/addons';
 import { StringConverter, NumberConverter, BooleanConverter } from 'html-element-property-mixins/src/utils/attribute-converters';
 import { html, render as litRender} from 'lit-html';
 export { html } from 'lit-html';
 
-export class HTMLButtonElement extends Properties(HTMLElement) {
+export class HTMLButtonElement extends PropertiesChangedCallback(Properties(HTMLElement)) {
   
   static get properties() {
 
@@ -88,8 +89,8 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
     this._type = type;
   }
 
-  propertyChangedCallback(propName, oldValue, newValue) {
-    super.propertyChangedCallback(propName, oldValue, newValue);
+  propertiesChangedCallback(propName, oldValue, newValue) {
+    super.propertiesChangedCallback && super.propertiesChangedCallback(propName, oldValue, newValue);
     this.render();
   }
 
@@ -116,10 +117,7 @@ export class HTMLButtonElement extends Properties(HTMLElement) {
   }
 
   render() {
-    window.cancelAnimationFrame(this._renderDebouncer);
-    this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this});  
-    });
+    litRender(this.template, this.shadowRoot || this, {eventContext: this});  
   }
 
   get accessKey() {
