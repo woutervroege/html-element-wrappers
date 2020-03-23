@@ -10,10 +10,6 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "html-element-property-mixins": "^0.10.3",
-    "lit-html": "^1.1.2"
-  },
   "devDependencies": {
     "chai": "^4.2.0",
     "es-dev-server": "^1.43.1",
