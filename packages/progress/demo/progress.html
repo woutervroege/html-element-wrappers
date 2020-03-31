@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="module">      
+      import { HTMLProgressElement, html } from '../lib/progress.js';
+      class Myprogress extends HTMLProgressElement {}
+      window.customElements.define('my-progress', Myprogress);
+    </script>
+  </head>
+
+  <body>
+    <my-progress value="10" max="100"></my-progress>
+  </body>
+
+</html>

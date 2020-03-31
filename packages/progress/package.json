@@ -1,0 +1,30 @@
+{
+  "name": "@html-element-wrappers/progress",
+  "version": "0.2.2",
+  "description": "HTMLProgressElement",
+  "author": "Wouter Vroege <wouter@woutervroege.nl>",
+  "homepage": "https://github.com/woutervroege/html-element-wrappers#readme",
+  "license": "MIT",
+  "main": "lib/progress.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woutervroege/html-element-wrappers.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/woutervroege/html-element-wrappers/issues"
+  },
+  "dependencies": {
+    "html-element-property-mixins": "^0.10.3",
+    "lit-html": "^1.2.1"
+  }
+}
