@@ -26,7 +26,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "gitHead": "9975a192d741affc5e7241d6bda5e65b0ff2b76d",
+  "gitHead": "cf1898644c11ea51587c5333e292d4af0541c51b",
   "dependencies": {
     "html-element-property-mixins": "^0.10.3",
     "lit-html": "^1.2.1"
