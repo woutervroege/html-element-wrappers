@@ -23,8 +23,12 @@
   "bugs": {
     "url": "https://github.com/woutervroege/html-element-wrappers/issues"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "html-element-property-mixins": "^0.10.3",
     "lit-html": "^1.2.1"
-  }
+  },
+  "gitHead": "cf1898644c11ea51587c5333e292d4af0541c51b"
 }
