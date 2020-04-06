@@ -1,6 +1,6 @@
 {
   "name": "@html-element-wrappers/audio",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "HTMLAudioElement",
   "author": "Wouter Vroege <wouter@woutervroege.nl>",
   "homepage": "https://github.com/woutervroege/html-element-wrappers#readme",
