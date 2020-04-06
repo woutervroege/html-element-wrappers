@@ -1,6 +1,6 @@
 import { Properties } from 'html-element-property-mixins';
 import { StringConverter, NumberConverter, BooleanConverter } from 'html-element-property-mixins/src/utils/attribute-converters';
-import { html, render as litRender} from 'lit-html';
+import { html, render as litRender} from 'lit-html/lib/shady-render';
 export { html } from 'lit-html';
 
 export class HTMLSelectElement extends Properties(HTMLElement) {
@@ -102,7 +102,6 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
     this.attachShadow({mode: 'open', delegatesFocus: true});
     this.render();
     this.__initFocusDelegation();
-    this.shadowRoot.addEventListener('slotchange', this._handleSlotChange.bind(this));
   }
 
   propertyChangedCallback(propName, oldValue, newValue) {
@@ -113,7 +112,8 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
   get styles() {
     return html`
       <style>
-        :host { outline: none }
+        :host { outline: none; }
+        ::slotted(option) { display: none; }
       </style>
     `;
   }
@@ -131,17 +131,17 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
         .size="${this.size}"
         .tabIndex="${this.tabIndex}"
         ?required="${this.required}"
-        @input="${(e) => this.selectedIndex = e.target.selectedIndex}"
-        @change="${(e) => this.selectedIndex = e.target.selectedIndex}"
+        @input="${this.__handleInput}"
+        @change="${this.__handleInput}"
       ></select>
-      <slot hidden></slot>
+      <slot @slotchange="${this.__handleSlotChange}">
     `;
   }
 
   render() {
     window.cancelAnimationFrame(this._renderDebouncer);
     this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this});  
+      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});  
     });
   }
 
@@ -209,7 +209,7 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
     return this.shadowRoot.querySelector('select');
   }
 
-  _handleSlotChange() {
+  __handleSlotChange() {
     this.$element.innerHTML = this.innerHTML;
   }
 
@@ -217,6 +217,13 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
     if(this.shadowRoot.delegatesFocus) return;
     this.addEventListener('focus', () => this.$element.focus());
     this.addEventListener('click', () => this.$element.focus());
+  }
+
+  __handleInput(e) {
+    e.stopPropagation();
+    this.selectedIndex = e.target.selectedIndex;
+    const evt = new CustomEvent(e.type, {...e.bubbles, ...e.cancelable, ...e.detail});
+    this.dispatchEvent(evt);
   }
 
 }

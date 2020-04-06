@@ -1,6 +1,6 @@
 import { Properties } from 'html-element-property-mixins';
 import { StringConverter, BooleanConverter } from 'html-element-property-mixins/src/utils/attribute-converters';
-import { html, render as litRender} from 'lit-html';
+import { html, render as litRender} from 'lit-html/lib/shady-render';
 export { html } from 'lit-html';
 
 export class HTMLImageElement extends Properties(HTMLElement) {
@@ -153,7 +153,7 @@ export class HTMLImageElement extends Properties(HTMLElement) {
   render() {
     window.cancelAnimationFrame(this._renderDebouncer);
     this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this});  
+      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});  
     });
   }
 

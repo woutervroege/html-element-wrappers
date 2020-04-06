@@ -1,7 +1,7 @@
 import { Properties } from 'html-element-property-mixins';
 import { PropertiesChangedCallback } from 'html-element-property-mixins/src/addons';
 import { NumberConverter } from 'html-element-property-mixins/src/utils/attribute-converters';
-import { html, render as litRender} from 'lit-html';
+import { html, render as litRender} from 'lit-html/lib/shady-render';
 export { html } from 'lit-html';
 
 export class HTMLProgressElement extends PropertiesChangedCallback(Properties(HTMLElement)) {
@@ -63,7 +63,7 @@ export class HTMLProgressElement extends PropertiesChangedCallback(Properties(HT
   }
 
   render() {
-    litRender(this.template, this.shadowRoot || this, {eventContext: this});  
+    litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});
   }
 
   get max() {

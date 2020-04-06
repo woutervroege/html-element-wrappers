@@ -1,5 +1,5 @@
 import { HTMLMediaElement } from '../../media';
-import { html, render as litRender} from 'lit-html';
+import { html, render as litRender} from 'lit-html/lib/shady-render';
 export { html } from 'lit-html';
 
 export class HTMLVideoElement extends HTMLMediaElement {
@@ -23,10 +23,7 @@ export class HTMLVideoElement extends HTMLMediaElement {
 
     const $element = document.createElement('video');
     this.poster = $element.poster;
-
     this.attachShadow({mode: 'open', delegatesFocus: true});
-    this.render();
-    this.__initFocusDelegation();
   }
 
   get videoHeight() {
@@ -39,7 +36,9 @@ export class HTMLVideoElement extends HTMLMediaElement {
   
   propertyChangedCallback(propName, oldValue, newValue) {
     super.propertyChangedCallback(propName, oldValue, newValue);
+    if(!this.shadowRoot) return;
     this.render();
+    if(propName === 'currentTime' && this.$element) this.$element.currentTime = this.currentTime;
   }
   
   get styles() {
@@ -56,7 +55,6 @@ export class HTMLVideoElement extends HTMLMediaElement {
         ?autoplay="${this.autoplay}"
         ?controls="${this.controls}"
         .crossOrigin="${this.crossOrigin}"
-        .currentTime="${this.currentTime}"
         ?defaultMuted="${this.defaultMuted}"
         .defaultPlaybackRate="${this.defaultPlaybackRate}"
         ?disableRemotePlayback="${this.disableRemotePlayback}"
@@ -98,12 +96,12 @@ export class HTMLVideoElement extends HTMLMediaElement {
   render() {
     window.cancelAnimationFrame(this._renderDebouncer);
     this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this});  
-    });
+      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});
+    });  
   }
   
   get $element() {
-    return this.shadowRoot.querySelector('video');
+    return this.shadowRoot && this.shadowRoot.querySelector('video');
   }
   
   __initFocusDelegation() {

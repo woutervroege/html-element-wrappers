@@ -16,7 +16,8 @@
     </my-select>
 
     <script>
-      demo.oninput = (e) => alert('input!')
+      demo.oninput = (e) => console.info('input', e.target.value)
+      demo.onchange = (e) => console.info('change', e.target.value)
     </script>
 
   </body>

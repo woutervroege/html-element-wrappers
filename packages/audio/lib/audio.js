@@ -1,5 +1,5 @@
 import { HTMLMediaElement } from '../../media';
-import { html, render as litRender} from 'lit-html';
+import { html, render as litRender} from 'lit-html/lib/shady-render';
 export { html } from 'lit-html';
 
 export class HTMLAudioElement extends HTMLMediaElement {
@@ -14,7 +14,9 @@ export class HTMLAudioElement extends HTMLMediaElement {
 
   propertyChangedCallback(propName, oldValue, newValue) {
     super.propertyChangedCallback(propName, oldValue, newValue);
+    if(!this.shadowRoot) return;
     this.render();
+    if(propName === 'currentTime' && this.$element) this.$element.currentTime = this.currentTime;
   }
   
   get styles() {
@@ -31,7 +33,6 @@ export class HTMLAudioElement extends HTMLMediaElement {
         ?autoplay="${this.autoplay}"
         ?controls="${this.controls}"
         .crossOrigin="${this.crossOrigin}"
-        .currentTime="${this.currentTime}"
         .defaultMuted="${this.defaultMuted}"
         .defaultPlaybackRate="${this.defaultPlaybackRate}"
         ?disableRemotePlayback="${this.disableRemotePlayback}"
@@ -73,7 +74,7 @@ export class HTMLAudioElement extends HTMLMediaElement {
   render() {
     window.cancelAnimationFrame(this._renderDebouncer);
     this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this});  
+      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});  
     });
   }
   

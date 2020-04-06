@@ -248,7 +248,8 @@ export class HTMLMediaElement extends Properties(HTMLElement) {
   }
 
   __bubbleEvent(e) {
-    const evt = new CustomEvent(e.type);
+    e.stopPropagation();
+    const evt = new CustomEvent(e.type, {...e.bubbles, ...e.cancelable, ...e.detail});
     this.dispatchEvent(evt);
   }
 

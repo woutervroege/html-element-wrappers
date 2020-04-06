@@ -1,6 +1,6 @@
 import { Properties } from 'html-element-property-mixins';
 import { StringConverter, NumberConverter, BooleanConverter } from 'html-element-property-mixins/src/utils/attribute-converters';
-import { html, render as litRender} from 'lit-html';
+import { html, render as litRender} from 'lit-html/lib/shady-render';
 export { html } from 'lit-html';
 
 export class HTMLInputElement extends Properties(HTMLElement) {
@@ -312,8 +312,8 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       .width="${this.width}"
       .type="${this.type}"
       .value="${this.value}"
-      @input="${(e) => { this.value = e.target.value; this.checked = e.target.checked; }}"
-      @change="${(e) => { this.value = e.target.value; this.checked = e.target.checked; }}"
+      @input="${this.__handleInput}"
+      @change="${this.__handleInput}"
       >
     `;
   }
@@ -321,7 +321,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
   render() {
     window.cancelAnimationFrame(this._renderDebouncer);
     this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this});  
+      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});
       if(this.pattern) this.$element.setAttribute('pattern', this.pattern);
       else this.$element.removeAttribute('pattern');
     });
@@ -402,6 +402,14 @@ export class HTMLInputElement extends Properties(HTMLElement) {
     if(this.shadowRoot.delegatesFocus) return;
     this.addEventListener('focus', () => this.$element.focus());
     this.addEventListener('click', () => this.$element.focus());
+  }
+  
+  __handleInput(e) {
+    e.stopPropagation();
+    this.value = e.target.value;
+    this.checked = e.target.checked;
+    const evt = new CustomEvent(e.type, {...e.bubbles, ...e.cancelable, ...e.detail});
+    this.dispatchEvent(evt);
   }
 
 }
