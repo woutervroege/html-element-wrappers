@@ -211,6 +211,7 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
 
   __handleSlotChange() {
     this.$element.innerHTML = this.innerHTML;
+    this.$element.selectedIndex = this.selectedIndex;
   }
 
   __initFocusDelegation() {
