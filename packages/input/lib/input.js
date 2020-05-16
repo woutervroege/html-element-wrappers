@@ -37,8 +37,8 @@ export class HTMLInputElement extends Properties(HTMLElement) {
         observe: true,
         DOM: true,
         reflect: true,
-        fromAttributeConverter: BooleanConverter.fromAttribute,
-        toAttributeConverter: BooleanConverter.toAttribute,
+        fromAttributeConverter: StringConverter.fromAttribute,
+        toAttributeConverter: StringConverter.toAttribute,
       },
 
       autofocus: {
@@ -289,7 +289,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       .accept="${this.accept}"
       .accessKey="${this.accessKey}"
       .alt="${this.alt}"
-      ?autocomplete="${this.autocomplete}"
+      .autocomplete="${this.autocomplete}"
       ?autofocus="${this.autofocus}"
       .capture="${this.capture}"
       ?checked="${this.checked}"
