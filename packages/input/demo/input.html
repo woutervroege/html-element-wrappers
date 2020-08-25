@@ -13,9 +13,8 @@
     <my-input id="demo" type="text" value="test" accesskey="x" checked pattern="email"></my-input>
 
     <script>
-      // demo.oninput = (e) => console.info('input', e.target.value);
-      // demo.onchange = (e) => console.info('change', e.target.value);
-      demo.addEventListener('haha', (e) => console.info('haha', e.target.value));
+      demo.oninput = (e) => console.info('input', e.target.value);
+      demo.onchange = (e) => console.info('change', e.target.value);
 </script>
 
   </body>
