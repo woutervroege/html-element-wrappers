@@ -102,8 +102,9 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
     this.attachShadow({mode: 'open', delegatesFocus: true});
     this.render();
     this.__initFocusDelegation();
+    this.__initMutationObserver();
   }
-
+  
   propertyChangedCallback(propName, oldValue, newValue) {
     super.propertyChangedCallback(propName, oldValue, newValue);
     this.render();
@@ -210,6 +211,7 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
   }
 
   __handleSlotChange() {
+    if(!this.$element) return;
     this.$element.innerHTML = this.innerHTML;
     this.$element.selectedIndex = this.selectedIndex;
   }
@@ -218,6 +220,12 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
     if(this.shadowRoot.delegatesFocus) return;
     this.addEventListener('focus', () => this.$element.focus());
     this.addEventListener('click', () => this.$element.focus());
+  }
+
+  __initMutationObserver() {
+    const config = { attributes: true, childList: true, subtree: true };
+    const observer = new MutationObserver(this.__handleSlotChange.bind(this));
+    observer.observe(this, config);
   }
 
   __handleInput(e) {
