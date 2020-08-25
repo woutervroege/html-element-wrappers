@@ -134,7 +134,7 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
         @input="${this.__handleInput}"
         @change="${this.__handleInput}"
       ></select>
-      <slot @slotchange="${this.__handleSlotChange}">
+      <slot @slotchange="${this.__handleSlotChange}"></slot>
     `;
   }
 
