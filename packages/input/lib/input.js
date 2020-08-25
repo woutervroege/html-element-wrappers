@@ -311,7 +311,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       .tabIndex="${this.tabIndex}"
       .width="${this.width}"
       .type="${this.type}"
-      .value="${this.value}"
+      value="${this.value}"
       @input="${this.__handleInput}"
       @change="${this.__handleInput}"
       >
