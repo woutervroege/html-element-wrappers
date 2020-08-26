@@ -23,7 +23,9 @@ export class HTMLVideoElement extends HTMLMediaElement {
 
     const $element = document.createElement('video');
     this.poster = $element.poster;
-    this.attachShadow({mode: 'open', delegatesFocus: true});
+    
+    this.attachShadow({mode: 'open', delegatesFocus: this.hasAttribute('delegatesfocus')});
+    if(this.hasAttribute('delegatesfocus')) this.__initFocusDelegation();
   }
 
   get videoHeight() {

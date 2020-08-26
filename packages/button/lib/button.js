@@ -73,9 +73,9 @@ export class HTMLButtonElement extends PropertiesChangedCallback(Properties(HTML
     this.type = $element.type;
     this.value = $element.value;
 
-    this.attachShadow({mode: 'open', delegatesFocus: true});
+    this.attachShadow({mode: 'open', delegatesFocus: this.hasAttribute('delegatesfocus')});
     this.render();
-    this.__initFocusDelegation();
+    if(this.hasAttribute('delegatesfocus')) this.__initFocusDelegation();
   }
 
   get type() {

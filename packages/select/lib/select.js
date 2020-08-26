@@ -99,9 +99,9 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
     this.tabIndex = $element.tabIndex;
     this.required = $element.required;
 
-    this.attachShadow({mode: 'open', delegatesFocus: true});
+    this.attachShadow({mode: 'open', delegatesFocus: this.hasAttribute('delegatesfocus')});
     this.render();
-    this.__initFocusDelegation();
+    if(this.hasAttribute('delegatesfocus')) this.__initFocusDelegation();
     this.__initMutationObserver();
   }
   

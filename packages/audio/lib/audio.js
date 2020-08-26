@@ -7,9 +7,9 @@ export class HTMLAudioElement extends HTMLMediaElement {
   constructor() {
     super();
 
-    this.attachShadow({mode: 'open', delegatesFocus: true});
+    this.attachShadow({mode: 'open', delegatesFocus: this.hasAttribute('delegatesfocus')});
     this.render();
-    this.__initFocusDelegation();
+    if(this.hasAttribute('delegatesfocus')) this.__initFocusDelegation();
   }
 
   propertyChangedCallback(propName, oldValue, newValue) {
