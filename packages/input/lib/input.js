@@ -282,7 +282,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
 
         input:invalid {
           border: 1px solid red;
-        }
+        }t
       </style>
     `;
   }

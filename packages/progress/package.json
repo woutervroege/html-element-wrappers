@@ -27,7 +27,7 @@
     "access": "public"
   },
   "dependencies": {
-    "html-element-property-mixins": "^0.10.7",
+    "html-element-property-mixins": "^0.10.11",
     "lit-html": "^1.2.1"
   },
   "gitHead": "19d964c64759615d9381ffc4ca656b150f59e316"
