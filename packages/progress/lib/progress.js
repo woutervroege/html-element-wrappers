@@ -63,9 +63,11 @@ export class HTMLProgressElement extends PropertiesChangedCallback(Properties(HT
   }
 
   render() {
-    litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});
+    window.requestAnimationFrame(() => {
+      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});  
+    });
   }
-
+  
   get max() {
     return this._max;
   }

@@ -140,8 +140,7 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
   }
 
   render() {
-    window.cancelAnimationFrame(this._renderDebouncer);
-    this._renderDebouncer = window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
       litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});  
     });
   }

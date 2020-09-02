@@ -117,7 +117,9 @@ export class HTMLButtonElement extends PropertiesChangedCallback(Properties(HTML
   }
 
   render() {
-    litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});
+    window.requestAnimationFrame(() => {
+      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});  
+    });
   }
 
   get accessKey() {

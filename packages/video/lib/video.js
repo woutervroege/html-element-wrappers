@@ -96,10 +96,9 @@ export class HTMLVideoElement extends HTMLMediaElement {
   }
   
   render() {
-    window.cancelAnimationFrame(this._renderDebouncer);
-    this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});
-    });  
+    window.requestAnimationFrame(() => {
+      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});  
+    });
   }
   
   get $element() {
