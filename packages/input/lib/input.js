@@ -222,6 +222,10 @@ export class HTMLInputElement extends Properties(HTMLElement) {
         DOM: true,
         fromAttributeConverter: StringConverter.fromAttribute,
         toAttributeConverter: StringConverter.toAttribute,
+      },
+
+      __elementFocused: {
+        observe: true
       }
 
     };
@@ -259,6 +263,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
     this.width = $element.width;
     this.type = $element.type;
     this.value = $element.value;
+    this.__elementFocused = false;
     
     this.attachShadow({mode: 'open', delegatesFocus: this.hasAttribute('delegatesfocus')});
     this.render();
@@ -311,7 +316,9 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       .tabIndex="${this.tabIndex}"
       .width="${this.width}"
       .type="${this.type}"
-      value="${this.value}"
+      .value="${this.value}"
+      @focus="${() => this.__elementFocused = true}"
+      @blur="${() => this.__elementFocused = false}"
       @input="${this.__handleInput}"
       @change="${this.__handleInput}"
       >
@@ -319,11 +326,9 @@ export class HTMLInputElement extends Properties(HTMLElement) {
   }
 
   render() {
-    window.cancelAnimationFrame(this._renderDebouncer);
-    this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});
-      if(this.pattern) this.$element.setAttribute('pattern', this.pattern);
-      else this.$element.removeAttribute('pattern');
+    if(this.__elementFocused===true) return;
+    window.requestAnimationFrame(() => {
+      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});  
     });
   }
 
