@@ -29,5 +29,8 @@
     "github": {
       "release": true
     }
+  },
+  "dependencies": {
+    "html-element-property-mixins": "^0.10.11"
   }
 }
