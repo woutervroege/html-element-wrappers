@@ -267,7 +267,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
     
     this.attachShadow({mode: 'open', delegatesFocus: this.__delegatesFocus});
     this.render();
-    if(!this.__delegatesFocus) this.addEventListener('focus', () => this.$element.focus())
+    if(!this.__delegatesFocus) this.addEventListener('focus', () => this.$element.focus());
   }
 
   propertyChangedCallback(propName, oldValue, newValue) {

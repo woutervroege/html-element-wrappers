@@ -75,7 +75,7 @@ export class HTMLButtonElement extends PropertiesChangedCallback(Properties(HTML
 
     this.attachShadow({mode: 'open', delegatesFocus: this.__delegatesFocus});
     this.render();
-    if(!this.__delegatesFocus) this.addEventListener('focus', () => this.$element.focus())
+    if(!this.__delegatesFocus) this.addEventListener('focus', () => this.$element.focus());
   }
 
   propertiesChangedCallback(propName, oldValue, newValue) {
