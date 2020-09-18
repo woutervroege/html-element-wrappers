@@ -1,4 +1,4 @@
-import { HTMLMediaElement } from '../../media';
+import { HTMLMediaElement } from '../../media/lib/media';
 import { html, render as litRender} from 'lit-html/lib/shady-render';
 export { html } from 'lit-html';
 
@@ -23,9 +23,10 @@ export class HTMLVideoElement extends HTMLMediaElement {
 
     const $element = document.createElement('video');
     this.poster = $element.poster;
-    
-    this.attachShadow({mode: 'open', delegatesFocus: this.hasAttribute('delegatesfocus')});
-    if(this.hasAttribute('delegatesfocus')) this.__initFocusDelegation();
+
+    this.attachShadow({mode: 'open', delegatesFocus: this.__delegatesFocus});
+    this.render();
+    if(!this.__delegatesFocus) this.addEventListener('focus', () => this.$element.focus());
   }
 
   get videoHeight() {

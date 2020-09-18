@@ -265,9 +265,9 @@ export class HTMLInputElement extends Properties(HTMLElement) {
     this.value = $element.value;
     this.__elementFocused = false;
     
-    this.attachShadow({mode: 'open', delegatesFocus: this.hasAttribute('delegatesfocus')});
+    this.attachShadow({mode: 'open', delegatesFocus: this.__delegatesFocus});
     this.render();
-    if(this.hasAttribute('delegatesfocus')) this.__initFocusDelegation();
+    if(!this.__delegatesFocus) this.addEventListener('focus', () => this.$element.focus())
   }
 
   propertyChangedCallback(propName, oldValue, newValue) {
@@ -345,7 +345,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
   }
 
   get tabIndex() {
-    return this._tabIndex;
+    return this.disabled === true ? -1 : this._tabIndex;
   }
 
   set tabIndex(val) {
@@ -403,10 +403,10 @@ export class HTMLInputElement extends Properties(HTMLElement) {
     return this.shadowRoot.querySelector('input') || {};
   }
 
-  __initFocusDelegation() {
-    if(this.shadowRoot.delegatesFocus) return;
-    this.addEventListener('focus', () => this.$element.focus());
-    this.addEventListener('click', () => this.$element.focus());
+  get __delegatesFocus() {
+    const _div = document.createElement('div');
+    _div.attachShadow({ mode: 'open', delegatesFocus: true });
+    return _div.shadowRoot.delegatesFocus || false;
   }
   
   __handleInput(e) {

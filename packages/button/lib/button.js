@@ -73,20 +73,9 @@ export class HTMLButtonElement extends PropertiesChangedCallback(Properties(HTML
     this.type = $element.type;
     this.value = $element.value;
 
-    this.attachShadow({mode: 'open', delegatesFocus: this.hasAttribute('delegatesfocus')});
+    this.attachShadow({mode: 'open', delegatesFocus: this.__delegatesFocus});
     this.render();
-    if(this.hasAttribute('delegatesfocus')) this.__initFocusDelegation();
-  }
-
-  get type() {
-    return this._type || 'submit';
-  }
-
-  set type(val) {
-    const type = val.toLowerCase();
-    const types = ['button', 'submit', 'reset'];
-    if(types.indexOf(type) === -1) return this._type = 'submit';
-    this._type = type;
+    if(!this.__delegatesFocus) this.addEventListener('focus', () => this.$element.focus())
   }
 
   propertiesChangedCallback(propName, oldValue, newValue) {
@@ -131,11 +120,22 @@ export class HTMLButtonElement extends PropertiesChangedCallback(Properties(HTML
   }
 
   get tabIndex() {
-    return this._tabIndex;
+    return this.disabled === true ? -1 : this._tabIndex;
   }
 
   set tabIndex(val) {
     this._tabIndex = parseInt(val);
+  }
+
+  get type() {
+    return this._type || 'submit';
+  }
+
+  set type(val) {
+    const type = val.toLowerCase();
+    const types = ['button', 'submit', 'reset'];
+    if(types.indexOf(type) === -1) return this._type = 'submit';
+    this._type = type;
   }
 
   get validationMessage() {
@@ -166,10 +166,11 @@ export class HTMLButtonElement extends PropertiesChangedCallback(Properties(HTML
     return this.shadowRoot.querySelector('button');
   }
 
-  __initFocusDelegation() {
-    if(this.shadowRoot.delegatesFocus) return;
-    this.addEventListener('focus', () => this.$element.focus());
-    this.addEventListener('click', () => this.$element.focus());
+  get __delegatesFocus() {
+    const _div = document.createElement('div');
+    _div.attachShadow({ mode: 'open', delegatesFocus: true });
+    return _div.shadowRoot.delegatesFocus || false; 
   }
+
 
 }

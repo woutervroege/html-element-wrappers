@@ -1,4 +1,4 @@
-import { HTMLMediaElement } from '../../media';
+import { HTMLMediaElement } from '../../media/lib/media';
 import { html, render as litRender} from 'lit-html/lib/shady-render';
 export { html } from 'lit-html';
 
@@ -7,9 +7,9 @@ export class HTMLAudioElement extends HTMLMediaElement {
   constructor() {
     super();
 
-    this.attachShadow({mode: 'open', delegatesFocus: this.hasAttribute('delegatesfocus')});
+    this.attachShadow({mode: 'open', delegatesFocus: this.__delegatesFocus});
     this.render();
-    if(this.hasAttribute('delegatesfocus')) this.__initFocusDelegation();
+    if(!this.__delegatesFocus) this.addEventListener('focus', () => this.$element.focus());
   }
 
   propertyChangedCallback(propName, oldValue, newValue) {
@@ -79,12 +79,6 @@ export class HTMLAudioElement extends HTMLMediaElement {
   
   get $element() {
     return this.shadowRoot.querySelector('audio');
-  }
-  
-  __initFocusDelegation() {
-    if(this.shadowRoot.delegatesFocus) return;
-    this.addEventListener('focus', () => this.$element.focus());
-    this.addEventListener('click', () => this.$element.focus());
   }
 
 }
