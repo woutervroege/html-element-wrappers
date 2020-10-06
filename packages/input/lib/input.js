@@ -272,6 +272,8 @@ export class HTMLInputElement extends Properties(HTMLElement) {
 
   propertyChangedCallback(propName, oldValue, newValue) {
     super.propertyChangedCallback(propName, oldValue, newValue);
+    // Safari sets cursor to index 0 if value is updated by wrapping element while the input is focussed, so we're blocking render while element has focus (input element's value is of course still updated by the elment itself).  
+    if(propName === 'value' && this.__elementFocused===true) {return};
     this.render();
   }
 
@@ -326,7 +328,6 @@ export class HTMLInputElement extends Properties(HTMLElement) {
   }
 
   render() {
-    if(this.__elementFocused===true) return;
     window.requestAnimationFrame(() => {
       litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});  
     });
