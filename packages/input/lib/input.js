@@ -137,6 +137,14 @@ export class HTMLInputElement extends Properties(HTMLElement) {
         toAttributeConverter: BooleanConverter.toAttribute,
       },
 
+      name: {
+        observe: true,
+        DOM: true,
+        reflect: true,
+        fromAttributeConverter: StringConverter.fromAttribute,
+        toAttributeConverter: StringConverter.toAttribute,
+      },
+
       pattern: {
         observe: true,
         DOM: true,
@@ -252,6 +260,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
     this.min = $element.min;
     this.minlength = $element.minlength;
     this.multiple = $element.multiple;
+    this.name = $element.name;
     this.pattern = $element.pattern;
     this.placeholder = $element.placeholder;
     this.readonly = $element.readonly;
@@ -309,6 +318,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       .min="${this.min}"
       .minlength="${this.minlength}"
       ?multiple="${this.multiple}"
+      .name="${this.name}"
       .placeholder="${this.placeholder}"
       ?readonly="${this.readonly}"
       ?required="${this.required}"
