@@ -308,6 +308,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       ?autocomplete="${this.autocomplete}"
       ?autofocus="${this.autofocus}"
       .capture="${this.capture}"
+      .checked="${this.checked}"
       ?checked="${this.checked}"
       .dirname="${this.dirname}"
       ?disabled="${this.disabled}"
