@@ -88,9 +88,9 @@ export class HTMLImageElement extends Properties(HTMLElement) {
     this.srcSet = $element.srcSet;
     this.useMap = $element.useMap;
 
-    this.attachShadow({mode: 'open', delegatesFocus: true});
+    this.attachShadow({mode: 'open', delegatesFocus: this.hasAttribute('delegatesfocus')});
     this.render();
-    this.__initFocusDelegation();
+    if(this.hasAttribute('delegatesfocus')) this.__initFocusDelegation();
   }
 
   get complete() {
@@ -151,8 +151,7 @@ export class HTMLImageElement extends Properties(HTMLElement) {
   }
 
   render() {
-    window.cancelAnimationFrame(this._renderDebouncer);
-    this._renderDebouncer = window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
       litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});  
     });
   }

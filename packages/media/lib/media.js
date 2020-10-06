@@ -253,4 +253,10 @@ export class HTMLMediaElement extends Properties(HTMLElement) {
     this.dispatchEvent(evt);
   }
 
+  get __delegatesFocus() {
+    const _div = document.createElement('div');
+    _div.attachShadow({ mode: 'open', delegatesFocus: true });
+    return _div.shadowRoot.delegatesFocus || false;
+  }
+
 }

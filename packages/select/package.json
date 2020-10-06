@@ -1,6 +1,6 @@
 {
   "name": "@html-element-wrappers/select",
-  "version": "0.4.1",
+  "version": "0.5.2",
   "description": "HTMLSelectorElement",
   "author": "Wouter Vroege <wouter@woutervroege.nl>",
   "homepage": "https://github.com/woutervroege/html-element-wrappers#readme",
@@ -28,7 +28,7 @@
   },
   "gitHead": "19d964c64759615d9381ffc4ca656b150f59e316",
   "dependencies": {
-    "html-element-property-mixins": "^0.10.7",
+    "html-element-property-mixins": "^0.10.11",
     "lit-html": "^1.2.1"
   }
 }

@@ -222,6 +222,10 @@ export class HTMLInputElement extends Properties(HTMLElement) {
         DOM: true,
         fromAttributeConverter: StringConverter.fromAttribute,
         toAttributeConverter: StringConverter.toAttribute,
+      },
+
+      __elementFocused: {
+        observe: true
       }
 
     };
@@ -259,10 +263,11 @@ export class HTMLInputElement extends Properties(HTMLElement) {
     this.width = $element.width;
     this.type = $element.type;
     this.value = $element.value;
-
-    this.attachShadow({mode: 'open', delegatesFocus: true});
+    this.__elementFocused = false;
+    
+    this.attachShadow({mode: 'open', delegatesFocus: this.__delegatesFocus});
     this.render();
-    this.__initFocusDelegation();
+    if(!this.__delegatesFocus) this.addEventListener('focus', () => this.$element.focus());
   }
 
   propertyChangedCallback(propName, oldValue, newValue) {
@@ -277,7 +282,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
 
         input:invalid {
           border: 1px solid red;
-        }
+        }t
       </style>
     `;
   }
@@ -312,6 +317,8 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       .width="${this.width}"
       .type="${this.type}"
       .value="${this.value}"
+      @focus="${() => this.__elementFocused = true}"
+      @blur="${() => this.__elementFocused = false}"
       @input="${this.__handleInput}"
       @change="${this.__handleInput}"
       >
@@ -319,11 +326,9 @@ export class HTMLInputElement extends Properties(HTMLElement) {
   }
 
   render() {
-    window.cancelAnimationFrame(this._renderDebouncer);
-    this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});
-      if(this.pattern) this.$element.setAttribute('pattern', this.pattern);
-      else this.$element.removeAttribute('pattern');
+    if(this.__elementFocused===true) return;
+    window.requestAnimationFrame(() => {
+      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});  
     });
   }
 
@@ -340,7 +345,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
   }
 
   get tabIndex() {
-    return this._tabIndex;
+    return this.disabled === true ? -1 : this._tabIndex;
   }
 
   set tabIndex(val) {
@@ -398,10 +403,10 @@ export class HTMLInputElement extends Properties(HTMLElement) {
     return this.shadowRoot.querySelector('input') || {};
   }
 
-  __initFocusDelegation() {
-    if(this.shadowRoot.delegatesFocus) return;
-    this.addEventListener('focus', () => this.$element.focus());
-    this.addEventListener('click', () => this.$element.focus());
+  get __delegatesFocus() {
+    const _div = document.createElement('div');
+    _div.attachShadow({ mode: 'open', delegatesFocus: true });
+    return _div.shadowRoot.delegatesFocus || false;
   }
   
   __handleInput(e) {

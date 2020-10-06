@@ -1,4 +1,4 @@
-import { HTMLMediaElement } from '../../media';
+import { HTMLMediaElement } from '../../media/lib/media';
 import { html, render as litRender} from 'lit-html/lib/shady-render';
 export { html } from 'lit-html';
 
@@ -23,7 +23,10 @@ export class HTMLVideoElement extends HTMLMediaElement {
 
     const $element = document.createElement('video');
     this.poster = $element.poster;
-    this.attachShadow({mode: 'open', delegatesFocus: true});
+
+    this.attachShadow({mode: 'open', delegatesFocus: this.__delegatesFocus});
+    this.render();
+    if(!this.__delegatesFocus) this.addEventListener('focus', () => this.$element.focus());
   }
 
   get videoHeight() {
@@ -94,10 +97,9 @@ export class HTMLVideoElement extends HTMLMediaElement {
   }
   
   render() {
-    window.cancelAnimationFrame(this._renderDebouncer);
-    this._renderDebouncer = window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});
-    });  
+    window.requestAnimationFrame(() => {
+      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});  
+    });
   }
   
   get $element() {

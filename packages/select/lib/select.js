@@ -99,11 +99,12 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
     this.tabIndex = $element.tabIndex;
     this.required = $element.required;
 
-    this.attachShadow({mode: 'open', delegatesFocus: true});
+    this.attachShadow({mode: 'open', delegatesFocus: this.__delegatesFocus});
     this.render();
-    this.__initFocusDelegation();
+    if(!this.__delegatesFocus) this.addEventListener('focus', () => this.$element.focus());
+    this.__initMutationObserver();
   }
-
+  
   propertyChangedCallback(propName, oldValue, newValue) {
     super.propertyChangedCallback(propName, oldValue, newValue);
     this.render();
@@ -134,13 +135,12 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
         @input="${this.__handleInput}"
         @change="${this.__handleInput}"
       ></select>
-      <slot @slotchange="${this.__handleSlotChange}">
+      <slot @slotchange="${this.__handleSlotChange}"></slot>
     `;
   }
 
   render() {
-    window.cancelAnimationFrame(this._renderDebouncer);
-    this._renderDebouncer = window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
       litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});  
     });
   }
@@ -166,7 +166,7 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
   }
 
   get tabIndex() {
-    return this._tabIndex;
+    return this.disabled === true ? -1 : this._tabIndex;
   }
 
   set tabIndex(val) {
@@ -209,15 +209,22 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
     return this.shadowRoot.querySelector('select');
   }
 
+  get __delegatesFocus() {
+    const _div = document.createElement('div');
+    _div.attachShadow({ mode: 'open', delegatesFocus: true });
+    return _div.shadowRoot.delegatesFocus || false;
+  }
+
   __handleSlotChange() {
+    if(!this.$element) return;
     this.$element.innerHTML = this.innerHTML;
     this.$element.selectedIndex = this.selectedIndex;
   }
 
-  __initFocusDelegation() {
-    if(this.shadowRoot.delegatesFocus) return;
-    this.addEventListener('focus', () => this.$element.focus());
-    this.addEventListener('click', () => this.$element.focus());
+  __initMutationObserver() {
+    const config = { attributes: true, childList: true, subtree: true };
+    const observer = new MutationObserver(this.__handleSlotChange.bind(this));
+    observer.observe(this, config);
   }
 
   __handleInput(e) {
