@@ -191,16 +191,16 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
     return this.$element.value;
   }
 
-  get willValidate() {
-    return this.$element.willValidate();
-  }
-
   get validationMessage() {
-    return this.$element.validationMessage();
+    return this.$element.validationMessage;
   }
 
   get validity() {
-    return this.$element.validity();
+    return this.$element.validity;
+  }
+
+  get willValidate() {
+    return this.$element.willValidate;
   }
 
   checkValidity()	{

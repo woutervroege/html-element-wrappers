@@ -363,15 +363,15 @@ export class HTMLInputElement extends Properties(HTMLElement) {
   }
 
   get validationMessage() {
-    return this.$element.validationMessage();
+    return this.$element.validationMessage;
   }
 
   get validity() {
-    return this.$element.validity();
+    return this.$element.validity;
   }
 
   get willValidate() {
-    return this.$element.willValidate();
+    return this.$element.willValidate;
   }
 
   checkValidity()	{
