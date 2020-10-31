@@ -354,10 +354,6 @@ export class HTMLInputElement extends Properties(HTMLElement) {
     return this.$element.list;
   }
 
-  get name() {
-    return this.$element.name || '';
-  }
-
   get tabIndex() {
     return this.disabled === true ? -1 : this._tabIndex;
   }

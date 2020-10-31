@@ -167,10 +167,6 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
     return this.$element.labels;
   }
 
-  get name() {
-    return this.$element.name || '';
-  }
-
   get options() {
     return this.$element.options;
   }
