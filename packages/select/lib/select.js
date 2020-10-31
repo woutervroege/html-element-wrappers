@@ -49,6 +49,14 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
         toAttributeConverter: BooleanConverter.toAttribute,
       },
 
+      name: {
+        observe: true,
+        DOM: true,
+        reflect: true,
+        fromAttributeConverter: StringConverter.fromAttribute,
+        toAttributeConverter: StringConverter.toAttribute,
+      },
+
       required: {
         observe: true,
         DOM: true,
@@ -94,6 +102,7 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
     this.disabled = $element.disabled;
     this.length = $element.length;
     this.multiple = $element.multiple;
+    this.name = $element.name;
     this.selectedIndex = $element.selectedIndex;
     this.size = $element.size;
     this.tabIndex = $element.tabIndex;
@@ -128,6 +137,7 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
         ?disabled="${this.disabled}"
         .length="${this.length}"
         ?multiple="${this.multiple}"
+        .name="${this.name}"
         .selectedIndex="${this.selectedIndex}"
         .size="${this.size}"
         .tabIndex="${this.tabIndex}"
@@ -155,6 +165,10 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
 
   get labels() {
     return this.$element.labels;
+  }
+
+  get name() {
+    return this.$element.name || '';
   }
 
   get options() {
