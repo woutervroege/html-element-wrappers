@@ -320,7 +320,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       @focus="${() => this.__elementFocused = true}"
       @blur="${() => this.__elementFocused = false}"
       @input="${this.__handleInput}"
-      @change="${this.__handleInput}"
+      @change="${this.__handleChange}"
       >
     `;
   }
@@ -410,11 +410,14 @@ export class HTMLInputElement extends Properties(HTMLElement) {
   }
   
   __handleInput(e) {
-    e.stopPropagation();
     this.value = e.target.value;
     this.checked = e.target.checked;
-    const evt = new CustomEvent(e.type, {...e.bubbles, ...e.cancelable, ...e.detail});
-    this.dispatchEvent(evt);
+  }
+
+  __handleChange(e) {
+    this.value = e.target.value;
+    this.checked = e.target.checked;
+    this.dispatchEvent(new CustomEvent('change', {bubbles: true, composed: true}));
   }
 
 }

@@ -15,7 +15,15 @@
     <script>
       demo.oninput = (e) => console.info('input', e.target.value);
       demo.onchange = (e) => console.info('change', e.target.value);
-</script>
+
+      document.oninput = e => {
+        console.info('light dom input', e.target.value, e.composed);
+      }
+
+      document.body.onchange = e => {
+        console.info('light dom change', e.target.value, e.composed);
+      }
+    </script>
 
   </body>
 

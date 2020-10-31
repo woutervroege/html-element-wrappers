@@ -133,7 +133,7 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
         .tabIndex="${this.tabIndex}"
         ?required="${this.required}"
         @input="${this.__handleInput}"
-        @change="${this.__handleInput}"
+        @change="${this.__handleChange}"
       ></select>
       <slot @slotchange="${this.__handleSlotChange}"></slot>
     `;
@@ -228,10 +228,12 @@ export class HTMLSelectElement extends Properties(HTMLElement) {
   }
 
   __handleInput(e) {
-    e.stopPropagation();
     this.selectedIndex = e.target.selectedIndex;
-    const evt = new CustomEvent(e.type, {...e.bubbles, ...e.cancelable, ...e.detail});
-    this.dispatchEvent(evt);
+  }
+
+  __handleChange(e) {
+    this.selectedIndex = e.target.selectedIndex;
+    this.dispatchEvent(new CustomEvent('change', {bubbles: true, composed: true}));
   }
 
 }
