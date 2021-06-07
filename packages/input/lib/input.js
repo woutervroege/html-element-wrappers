@@ -312,7 +312,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       .height="${this.height}"
       .inputmode="${this.inputmode}"
       .max="${this.max}"
-      .maxlength="${this.maxlength}"
+      maxlength="${this.maxlength}"
       .min="${this.min}"
       minlength="${this.minlength}"
       ?multiple="${this.multiple}"
