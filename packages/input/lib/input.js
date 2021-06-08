@@ -317,7 +317,6 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       .minlength="${this.minlength}"
       ?multiple="${this.multiple}"
       .name="${this.name}"
-      .pattern="${this.pattern}"
       .placeholder="${this.placeholder}"
       ?readonly="${this.readonly}"
       ?required="${this.required}"
@@ -339,7 +338,9 @@ export class HTMLInputElement extends Properties(HTMLElement) {
   render() {
     if(this.__elementFocused===true) return;
     window.requestAnimationFrame(() => {
-      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});  
+      litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});
+      if(this.pattern) this.$element.setAttribute('pattern', this.pattern);
+      else this.$element.removeAttribute('pattern');
     });
   }
 
