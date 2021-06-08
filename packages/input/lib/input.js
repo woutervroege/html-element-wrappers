@@ -317,7 +317,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       .minlength="${this.minlength}"
       ?multiple="${this.multiple}"
       .name="${this.name}"
-      pattern="${this.pattern}"
+      .pattern="${this.pattern}"
       .placeholder="${this.placeholder}"
       ?readonly="${this.readonly}"
       ?required="${this.required}"
