@@ -145,6 +145,14 @@ export class HTMLInputElement extends Properties(HTMLElement) {
         toAttributeConverter: BooleanConverter.toAttribute,
       },
 
+      name: {
+        observe: true,
+        DOM: true,
+        reflect: true,
+        fromAttributeConverter: StringConverter.fromAttribute,
+        toAttributeConverter: StringConverter.toAttribute,
+      },
+
       pattern: {
         observe: true,
         DOM: true,
@@ -281,6 +289,8 @@ export class HTMLInputElement extends Properties(HTMLElement) {
 
   propertyChangedCallback(propName, oldValue, newValue) {
     super.propertyChangedCallback(propName, oldValue, newValue);
+    // Safari sets cursor to index 0 if value is updated by wrapping element while the input is focussed, so we're blocking render while element has focus (input element's value is of course still updated by the elment itself).  
+    if(propName === 'value' && this.__elementFocused === true) {return;}
     this.render();
   }
 
@@ -306,7 +316,7 @@ export class HTMLInputElement extends Properties(HTMLElement) {
       ?autocomplete="${this.autocomplete}"
       ?autofocus="${this.autofocus}"
       .capture="${this.capture}"
-      ?checked="${this.checked}"
+      .checked="${this.checked}"
       .dirname="${this.dirname}"
       ?disabled="${this.disabled}"
       .height="${this.height}"
@@ -336,7 +346,6 @@ export class HTMLInputElement extends Properties(HTMLElement) {
   }
 
   render() {
-    if(this.__elementFocused===true) return;
     window.requestAnimationFrame(() => {
       litRender(this.template, this.shadowRoot, {eventContext: this, scopeName: this.localName});
       if(this.pattern) this.$element.setAttribute('pattern', this.pattern);
