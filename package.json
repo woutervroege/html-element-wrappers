@@ -17,8 +17,8 @@
     "husky": "^3.0.9",
     "lerna": "^3.18.3",
     "lerna-update-wizard": "^0.17.7",
-    "mocha": "^7.1.0",
-    "release-it": "^12.6.0"
+    "mocha": "^10.2.0",
+    "release-it": "^15.6.0"
   },
   "husky": {
     "hooks": {
